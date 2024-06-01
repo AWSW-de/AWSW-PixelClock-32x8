@@ -11,7 +11,7 @@
 // #
 // ###########################################################################################################################################
 // #
-// # Compatible with PixelClock version: V1.0.0
+// # Compatible with PixelClock version: V1.0.1
 // #
 // ###########################################################################################################################################
 
@@ -19,9 +19,6 @@
 // ###########################################################################################################################################
 // # Hardware settings:
 // ###########################################################################################################################################
-// #define PIN 32
-// #define NUMstrip 256  // How many Neostrip are attached to the Arduino
-// Adafruit_NeoPixel strip(NUMstrip, PIN, NEO_GRB + NEO_KHZ800);
 #define LEDPIN 32      // ESP32 pin connected to the NeoPixels matrix
 #define NUMPIXELS 256  // How many NeoPixels are attached to the Arduino
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUMPIXELS, LEDPIN, NEO_GRB + NEO_KHZ800);

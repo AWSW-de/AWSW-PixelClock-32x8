@@ -17,6 +17,8 @@
 // #
 // # You will need to add the following libraries to your Arduino IDE to use the project:
 // # - Adafruit NeoPixel      // by Adafruit:                     https://github.com/adafruit/Adafruit_NeoPixel
+// # - Adafruit GFX           // by Adafruit:                     https://github.com/adafruit/Adafruit-GFX-Library
+// # - Adafruit NeoMatrix     // by Adafruit:                     https://github.com/adafruit/Adafruit_NeoMatrix
 // # - AsyncTCP               // by me-no-dev:                    https://github.com/me-no-dev/AsyncTCP
 // # - ESPAsyncWebServer      // by me-no-dev:                    https://github.com/me-no-dev/ESPAsyncWebServer
 // # - ESPUI                  // by s00500:                       https://github.com/s00500/ESPUI/archive/refs/tags/2.2.3.zip
@@ -24,28 +26,27 @@
 // # - LITTLEFS               // by lorol:                        https://github.com/lorol/LITTLEFS
 // #
 // ###########################################################################################################################################
-#include <WiFi.h>       // Used to connect the ESP32 to your WiFi
-#include <WebServer.h>  // ESP32 OTA update function
-#include <Update.h>     // ESP32 OTA update function
-#include <Adafruit_GFX.h>
-#include <Adafruit_NeoMatrix.h>
-#include <Adafruit_NeoPixel.h>  // Used to drive the NeoPixel LEDs
-#include "time.h"               // Used for NTP time requests
-#include <AsyncTCP.h>           // Used for the internal web server
-#include <ESPAsyncWebServer.h>  // Used for the internal web server
-#include <DNSServer.h>          // Used for the internal web server
-#include <ESPUI.h>              // Used for the internal web server
-#include "esp_log.h"            // Disable WiFi debug warnings
-#include <ESP32Time.h>          // Used for the Offline Mode ESP32 time function
-#include <Preferences.h>        // Used to save the configuration to the ESP32 flash
-#include "settings.h"           // Settings are stored in a seperate file to make to code better readable and to be able to switch to other settings faster
-
+#include <WiFi.h>                // Used to connect the ESP32 to your WiFi
+#include <WebServer.h>           // ESP32 OTA update function
+#include <Update.h>              // ESP32 OTA update function
+#include <Adafruit_GFX.h>        // Used to drive the NeoPixel LEDs
+#include <Adafruit_NeoMatrix.h>  // Used to drive the NeoPixel LEDs
+#include <Adafruit_NeoPixel.h>   // Used to drive the NeoPixel LEDs
+#include "time.h"                // Used for NTP time requests
+#include <AsyncTCP.h>            // Used for the internal web server
+#include <ESPAsyncWebServer.h>   // Used for the internal web server
+#include <DNSServer.h>           // Used for the internal web server
+#include <ESPUI.h>               // Used for the internal web server
+#include "esp_log.h"             // Disable WiFi debug warnings
+#include <ESP32Time.h>           // Used for the Offline Mode ESP32 time function
+#include <Preferences.h>         // Used to save the configuration to the ESP32 flash
+#include "settings.h"            // Settings are stored in a seperate file to make to code better readable and to be able to switch to other settings faster
 
 
 // ###########################################################################################################################################
 // # Version number of the code:
 // ###########################################################################################################################################
-const char* CLOCK_VERSION = "V1.0.0";
+const char* CLOCK_VERSION = "V1.0.1";
 
 
 // ###########################################################################################################################################
@@ -475,10 +476,9 @@ void setupWebInterface() {
 
     // Show IP-address on startup:
     ESPUI.switcher("Show IP-address on startup", &switchShowIP, ControlColor::Dark, useshowip);
-    
+
     // Use the number test function on startup
     ESPUI.switcher("Test the pixel numbers on startup", &switchtestNumbers, ControlColor::Dark, usetestNumbers);
-
   }
 
 
@@ -844,18 +844,18 @@ void buttonWiFiReset(Control* sender, int type, void* param) {
 // ###########################################################################################################################################
 // # GUI: Update the PixelClock:
 // ###########################################################################################################################################
-// void buttonUpdate(Control* sender, int type, void* param) {
-//   preferences.end();
-//   updatedevice = false;
-//   delay(1000);
-//   ESPUI.updateButton(sender->id, "Update mode active now - Use the update url: >>>");
-//   if (updatemode == false) {
-//     updatemode = true;
-//     TextOnMatrix("SW-Up", 0, 255, 0);
-//     updatedevice = false;
-//     Serial.println("Status: Update request");
-//   }
-// }
+void buttonUpdate(Control* sender, int type, void* param) {
+  preferences.end();
+  updatedevice = false;
+  delay(1000);
+  ESPUI.updateButton(sender->id, "Update mode active now - Use the update url: >>>");
+  if (updatemode == false) {
+    updatemode = true;
+    TextOnMatrix("SW-Up", 0, 255, 0);
+    updatedevice = false;
+    Serial.println("Status: Update request");
+  }
+}
 
 
 // ###########################################################################################################################################
