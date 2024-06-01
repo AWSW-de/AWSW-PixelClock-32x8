@@ -46,7 +46,7 @@
 // ###########################################################################################################################################
 // # Version number of the code:
 // ###########################################################################################################################################
-const char* CLOCK_VERSION = "V1.1.0";
+const char* CLOCK_VERSION = "V1.1.1";
 
 
 // ###########################################################################################################################################
@@ -617,7 +617,7 @@ void setupWebInterface() {
     ESPUI.label("Update URLs", ControlColor::Dark, "<a href='http://" + IpAddress2String(WiFi.localIP()) + ":8080' target='_blank' style='color:#ffffff;'>http://" + IpAddress2String(WiFi.localIP()) + ":8080</a> or <a href='http://" + String(WiFi.getHostname()) + ":8080' target='_blank' style='color:#ffffff;'>http://" + String(WiFi.getHostname()) + ":8080</a>");
 
     // AWSW software GitHub repository:
-    ESPUI.label("Download newer software updates here", ControlColor::Dark, "<a href='https://github.com/AWSW-de/PixelClock-16x8-LED-matrix' target='_blank' style='color:#ffffff;'>https://github.com/AWSW-de/PixelClock-16x8-LED-matrix</a>");
+    ESPUI.label("Download newer software updates here", ControlColor::Dark, "<a href='https://github.com/AWSW-de/AWSW-PixelClock-32x8' target='_blank' style='color:#ffffff;'>https://github.com/AWSW-de/AWSW-PixelClock-32x8</a>");
   }
 
 
@@ -643,7 +643,7 @@ void setupWebInterface() {
   ESPUI.separator("License information:");
 
   // License information:
-  ESPUI.label("License information", ControlColor::Dark, "NonCommercial — You may not use the project for commercial purposes! © 2024 Copyright by <a href='https://github.com/AWSW-de/PixelClock-16x8-LED-matrix' target='_blank' style='color:#ffffff;'>AWSW</a>");
+  ESPUI.label("License information", ControlColor::Dark, "NonCommercial — You may not use the project for commercial purposes! © 2024 Copyright by <a href='https://github.com/AWSW-de/AWSW-PixelClock-32x8' target='_blank' style='color:#ffffff;'>AWSW</a>");
 
 
 
