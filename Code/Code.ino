@@ -46,7 +46,7 @@
 // ###########################################################################################################################################
 // # Version number of the code:
 // ###########################################################################################################################################
-const char* CLOCK_VERSION = "V1.0.1";
+const char* CLOCK_VERSION = "V1.1.0";
 
 
 // ###########################################################################################################################################
@@ -607,7 +607,6 @@ void setupWebInterface() {
 
   // Section Update:
   // ###############
-  /* TODO: Actually out of order !
   if (UseOnlineMode == 1) {
     ESPUI.separator("Update:");
 
@@ -619,7 +618,7 @@ void setupWebInterface() {
 
     // AWSW software GitHub repository:
     ESPUI.label("Download newer software updates here", ControlColor::Dark, "<a href='https://github.com/AWSW-de/PixelClock-16x8-LED-matrix' target='_blank' style='color:#ffffff;'>https://github.com/AWSW-de/PixelClock-16x8-LED-matrix</a>");
-  }*/
+  }
 
 
   // Section Maintenance:
@@ -846,12 +845,14 @@ void buttonWiFiReset(Control* sender, int type, void* param) {
 // ###########################################################################################################################################
 void buttonUpdate(Control* sender, int type, void* param) {
   preferences.end();
+  useWiFiReCon = 0;  // Temporary set "Active WiFi reconnect to off during the update to avoid problems during the update"
   updatedevice = false;
   delay(1000);
   ESPUI.updateButton(sender->id, "Update mode active now - Use the update url: >>>");
   if (updatemode == false) {
     updatemode = true;
-    TextOnMatrix("SW-Up", 0, 255, 0);
+    TextOnMatrix("SW UP", 0, 0, 255);
+    delay(1000);
     updatedevice = false;
     Serial.println("Status: Update request");
   }
@@ -2242,10 +2243,16 @@ void setupOTAupate() {
       otaserver.sendHeader("Connection", "close");
       if (Update.hasError()) {
         otaserver.send(200, "text/html", otaNOK);
+        TextOnMatrix("SW UP", 255, 0, 0);
+        delay(1000);
         TextOnMatrix("RESET", 255, 0, 0);
+        delay(1000);
       } else {
         otaserver.send(200, "text/html", otaOK);
+        TextOnMatrix("SW UP", 0, 255, 0);
+        delay(1000);
         TextOnMatrix("RESET", 0, 255, 0);
+        delay(1000);
       }
       delay(3000);
       ESP.restart();
@@ -2253,6 +2260,8 @@ void setupOTAupate() {
     []() {
       HTTPUpload& upload = otaserver.upload();
       if (upload.status == UPLOAD_FILE_START) {
+        TextOnMatrix("LOAD", 0, 0, 255);
+        delay(1000);
         Serial.setDebugOutput(true);
         Serial.printf("Update: %s\n", upload.filename.c_str());
         if (!Update.begin()) {
@@ -2264,6 +2273,8 @@ void setupOTAupate() {
         }
       } else if (upload.status == UPLOAD_FILE_END) {
         if (Update.end(true)) {
+          TextOnMatrix("LOAD", 0, 255, 0);
+          delay(1000);
           Serial.printf("Update success: %u\nRebooting...\n", upload.totalSize);
         } else {
           Update.printError(Serial);
