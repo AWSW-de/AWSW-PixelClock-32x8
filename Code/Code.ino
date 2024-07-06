@@ -19,6 +19,8 @@
 // # - Adafruit NeoPixel      // by Adafruit:                     https://github.com/adafruit/Adafruit_NeoPixel
 // # - Adafruit GFX           // by Adafruit:                     https://github.com/adafruit/Adafruit-GFX-Library
 // # - Adafruit NeoMatrix     // by Adafruit:                     https://github.com/adafruit/Adafruit_NeoMatrix
+// # - Adafruit BusIO         // by Adafruit:                     https://github.com/adafruit/Adafruit_BusIO
+// # - ESP32Time              // by fbiego:                       https://github.com/fbiego/ESP32Time
 // # - AsyncTCP               // by me-no-dev:                    https://github.com/me-no-dev/AsyncTCP
 // # - ESPAsyncWebServer      // by me-no-dev:                    https://github.com/me-no-dev/ESPAsyncWebServer
 // # - ESPUI                  // by s00500:                       https://github.com/s00500/ESPUI/archive/refs/tags/2.2.3.zip
@@ -46,7 +48,7 @@
 // ###########################################################################################################################################
 // # Version number of the code:
 // ###########################################################################################################################################
-const char* CLOCK_VERSION = "V1.1.1";
+const char* CLOCK_VERSION = "V1.1.2";
 
 
 // ###########################################################################################################################################
