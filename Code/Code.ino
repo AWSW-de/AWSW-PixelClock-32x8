@@ -48,7 +48,7 @@
 // ###########################################################################################################################################
 // # Version number of the code:
 // ###########################################################################################################################################
-const char* CLOCK_VERSION = "V1.1.2";
+const char* CLOCK_VERSION = "V1.1.3";
 
 
 // ###########################################################################################################################################
@@ -1585,7 +1585,7 @@ void handleLEDupdate() {  // LED server pages urls:
     int paramsNr = request->params();
     // Serial.println(paramsNr);
     for (int i = 0; i < paramsNr; i++) {
-      AsyncWebParameter* p = request->getParam(i);
+      const AsyncWebParameter* p = request->getParam(i);
       // Serial.print("Param name: ");
       // Serial.println(p->name());
       // Serial.print("Param value: ");
